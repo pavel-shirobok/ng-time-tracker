@@ -14,6 +14,7 @@ var JS_LIB = [
 ];
 
 var JS_APP = [
+    "src/frontend/js/app/models/**/*.js",
     "src/frontend/js/app/directives/**/*.js",
     "src/frontend/js/app/services/**/*.js",
     "src/frontend/js/app/controllers/**/*.js",
@@ -45,4 +46,29 @@ gulp.task('css/lib', function(){
     return gulp.src('src/frontend/css/*.css').
             pipe(concat('lib_styles.css')).
             pipe(gulp.dest('build/frontend/css'));
+});
+
+gulp.task('css/less', function(){
+    return gulp.src('src/frontend/css/*.less').
+        pipe(less()).
+        pipe(concat('app_styles.css')).
+        pipe(gulp.dest('build/frontend/css'));
+});
+
+gulp.task('img', function(){
+    return gulp.src('src/frontend/img/**/*.*').
+        pipe(gulp.dest('build/frontend/img'));
+});
+
+gulp.task('full',['static', 'js/lib', 'js/app', 'css/lib', 'css/less', 'img']);
+
+gulp.task('default', function(){
+    watch('src/frontend/**/*.*', function(){
+        gulp.start('static');
+        gulp.start('js/lib');
+        gulp.start('js/app');
+        gulp.start('css/lib');
+        gulp.start('css/less');
+        gulp.start('img');
+    });
 });

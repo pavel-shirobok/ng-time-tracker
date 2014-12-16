@@ -1,0 +1,13 @@
+<md-dialog style="width: 300px; height: 250px">
+    <md-content>
+        <md-content>
+            <md-text-float label="Project Name" ng-model="project.name"></md-text-float>
+            <md-text-float type="number" label="Rate" ng-model="project.rate"></md-text-float>
+        </md-content>
+
+        <md-actions>
+            <md-button ng-disabled="isInvalidData()" ng-click="saveProject()" style="float:right" class="md-primary">Save</md-button>
+            <md-button ng-click="cancelEdit()" style="float:right" >Cancel</md-button>
+        </md-actions>
+    </md-content>
+</md-dialog>
