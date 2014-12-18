@@ -1,17 +1,78 @@
 @pretty-red : #ef5350;
 @icon-size : 24px;
 
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
 
-.left-panel-button {
+
+/*.left-panel-button {
   float: right;
 }
 
 .project-button {
   width: 100%;
   height: 50px;
+
+
 }
 
 .tt-icon {
   opacity: 0.5;
+}*/
+
+.add-project-button {
+  position: fixed;
+  right: 50px;
+  bottom: 43px;
+  z-index: 9999;
 }
 
+.project-tabs {
+  height: 100vh;
+
+
+  .md-tabs-content{
+    height: ~"calc(100% - 48px)";
+    .md-tab-content {
+      height: 100%;
+    }
+  }
+}
+
+.project-view {
+  @header_height : 70px;
+  @footer_height : 70px;
+  @footer_plus_header : @footer_height + @header_height;
+
+  position: relative;
+
+  .header, .content, .footer {
+    position: absolute;
+    width: 100%;
+    float: left;
+  }
+
+  .header {
+    top: 0;
+    height: @header_height;
+    .shadow(1);
+  }
+
+  .content {
+    top : @header_height;
+    height: ~"-webkit-calc(100% - @{footer_plus_header})";
+  }
+  .footer {
+    bottom: 0;
+    height: @footer_height;
+    .shadow(-1);
+  }
+
+  .shadow(@multiplier) {
+    @shift : @multiplier * 2px;
+    box-shadow: 0 @shift 5px 0 rgba(0, 0, 0, 0.26);
+  }
+}

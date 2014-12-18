@@ -1,12 +1,34 @@
-(window.models || (window.models = {})).TimeTracker = function(){
+models.TimeTracker = function(lastID){
     var self = this;
-    var projects = [];
+    self.lastID = lastID || 0;
+    self.projects = [];
 
-    self.addProject = function(id, name, rate) {
-        var project = new models.Project(id, name, rate)
-        projects.push(project);
-        return project;
-    };
+    self.__defineGetter__('nextID', function(){
+        return ++self.lastID;
+    });
 
-    self.__defineGetter__('projects', function(){ return projects; });
+    self.toJSON = function(){
+        return models.TimeTracker.toJSON(self);
+    }
 };
+
+models.TimeTracker.parse = function(proto_json){
+    var timeTracker = new models.TimeTracker();
+
+    timeTracker.lastID = proto_json.lastID;
+
+    $(proto_json.projects).each(function(){
+        timeTracker.projects.push(
+            models.Project.parse(this)
+        )
+    });
+
+    return timeTracker;
+};
+
+models.TimeTracker.toJSON = function(project){
+    return {
+        lastID : project.lastID,
+        projects : $(project.projects).map(function(){ return models.Project.toJSON(this); })
+    }
+}

@@ -14,6 +14,7 @@ var JS_LIB = [
 ];
 
 var JS_APP = [
+    "src/frontend/js/app/__package.js",
     "src/frontend/js/app/models/**/*.js",
     "src/frontend/js/app/directives/**/*.js",
     "src/frontend/js/app/services/**/*.js",

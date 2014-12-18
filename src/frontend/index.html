@@ -2,51 +2,30 @@
 <html lang="en" ng-app="TimeTrackerApp">
 <head>
     <meta charset="UTF-8">
+    <meta name="theme-color" content="#039be5">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Time tracker by Pavel Shirobok</title>
     <link rel="stylesheet" href="css/lib_styles.css"/>
     <link rel="stylesheet" href="css/app_styles.css"/>
 </head>
-<body ng-controller="Test">
+<body ng-controller="AppController">
 
-    <div layout="column" style="height:100%">
-        <div layout="row" style="height:100%">
-            <!--  -->
-            <md-sidenav class="md-sidenav-left md-whiteframe-z4" md-component-id="menu">
-                <md-toolbar>
-                    <h2 class="md-toolbar-tools">
-                        <md-button style="float:right" ng-click="closeMenu()">
-                            <md-icon class="tt-icon" icon="img/icons/close.svg"></md-icon>
-                        </md-button>
-                        <span>Menu</span>
-                    </h2>
-                </md-toolbar>
+    <div class="column" layout-fill>
 
-                <md-content style="height: calc(100% - 65px);">
-                    <md-list>
-                        <md-item ng-repeat="tab in tabs">
-                            <md-item-content>
-                                <md-button class="project-button">{{tab.name}}</md-button>
-                            </md-item-content>
-                        </md-item>
-                    </md-list>
-                </md-content>
+        <md-tabs class="project-tabs">
+            <md-tab ng-repeat="prj in projects" label="{{prj.name}}">
+                <tt-project project="prj"></tt-project>
+            </md-tab>
+        </md-tabs>
 
+        <md-button
+                ng-click="createProject($event)"
+                class="md-fab md-primary add-project-button"
+                aria-label="Profile"
 
-            </md-sidenav>
-
-            <md-column style="width:100%">
-                <md-toolbar>
-                    <h2 class="md-toolbar-tools">
-                        <md-button ng-click="openMenu()">
-                            <md-icon class="tt-icon" icon="img/icons/menu.svg"></md-icon>
-                        </md-button>
-                        <span>Test 123</span>
-                    </h2>
-                </md-toolbar>
-            </md-column>
-
-        </div>
+                >
+            <md-icon icon="/img/icons/plus.svg" style="width: 24px; height: 51px; line-height: 51px; opacity: 0.5;"></md-icon>
+        </md-button>
     </div>
 
     <script src="js/lib.js"></script>

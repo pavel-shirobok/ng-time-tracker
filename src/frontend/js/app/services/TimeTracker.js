@@ -1,30 +1,50 @@
 angular
     .module('TimeTracker', [
-        'TimeTrackerAPI'
-    ])
-    .service('TimeTracker', function(TimeTrackerAPI){
-        var self = this;
-        var model = new models.TimeTracker();
 
-        self.getProjects = function(){
-            return TimeTrackerAPI.getProjects().then(function(projects){
-                $(projects).each(function(){
-                    model.addProject(
-                        this.id,
-                        this.name,
-                        this.rate
-                    );
-                });
-                return model.projects;
-            })
-        };
+    ])
+    .service('TimeTracker', function($rootScope) {
+        var self = this;
+        var model;
+
+        if(
+            localStorage['data']==undefined ||
+            JSON.parse(localStorage['data']) == undefined
+        ){
+            var proto_json = { lastID : 0, projects : [] };
+            model = models.TimeTracker.parse(proto_json);
+            flush();
+        }
+
+
+
+        model = models.TimeTracker.parse(
+            JSON.parse(
+                localStorage['data']
+            )
+        );
+
+        console.log(model);
+
+        function flush() {
+            localStorage['data'] = JSON.stringify(model.toJSON());
+        }
+
+        self.__defineGetter__('nextID', function(){
+            var newID = model.nextID;
+            flush();
+            return newID;
+        });
+
+        self.projects = model.projects;
 
         self.createProject = function(name, rate) {
-            return TimeTrackerAPI.createProject(name, rate).
-                then(function(project){
-                    return model.addProject(project.id, project.name, project.rate);
-                });
+            var project = new models.Project(self.nextID, name, rate);
+            model.projects.push(project);
+            flush();
+            return project;
         };
 
-        self.__defineGetter__('model', function(){ return model; });
+
+        //TODO make getter
+        //self.model = model;
     });

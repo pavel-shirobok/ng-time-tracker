@@ -19,7 +19,7 @@ angular.
                         proto_project : proto_project
                     }
                 }
-            );
+            )
         }
 
     });
