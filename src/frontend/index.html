@@ -11,20 +11,19 @@
 <body ng-controller="AppController">
 
     <div class="column" layout-fill>
-
-        <md-tabs class="project-tabs">
+        <md-tabs class="project-tabs" md-selected="selectedIndex">
             <md-tab ng-repeat="prj in projects" label="{{prj.name}}">
                 <tt-project project="prj"></tt-project>
             </md-tab>
         </md-tabs>
 
         <md-button
-                ng-click="createProject($event)"
+                ng-click="openMenu($event)"
                 class="md-fab md-primary add-project-button"
                 aria-label="Profile"
 
                 >
-            <md-icon icon="/img/icons/plus.svg" style="width: 24px; height: 51px; line-height: 51px; opacity: 0.5;"></md-icon>
+            <md-icon icon="/img/icons/menu.svg" style="width: 44px; height: 51px; line-height: 65px; opacity: 0.5;"></md-icon>
         </md-button>
     </div>
 

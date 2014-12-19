@@ -20,6 +20,21 @@ angular.
                     }
                 }
             )
-        }
+        };
+
+        self.openConfirmRemove = function (project, $event) {
+            return $mdDialog.show(
+                $mdDialog.confirm({})
+                    .title('Do you want delete project?')
+                    .content('Delete "' + project.name + '" ?')
+                    .ok('Delete it!')
+                    .cancel('No')
+                    .ariaLabel('Lucky day')
+                    .targetEvent($event.originalEvent)
+            ).then(function(){
+
+                    return project;
+                });
+        };
 
     });

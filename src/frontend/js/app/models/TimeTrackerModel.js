@@ -3,6 +3,19 @@ models.TimeTracker = function(lastID){
     self.lastID = lastID || 0;
     self.projects = [];
 
+    self.add = function(project) {
+        self.projects.push(project);
+        return self;
+    };
+
+    self.remove = function(project) {
+        var iof = self.projects.indexOf(project);
+        if(iof > -1){
+            self.projects.splice(iof, 1);
+        }
+        return self;
+    };
+
     self.__defineGetter__('nextID', function(){
         return ++self.lastID;
     });

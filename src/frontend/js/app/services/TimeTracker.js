@@ -39,9 +39,15 @@ angular
 
         self.createProject = function(name, rate) {
             var project = new models.Project(self.nextID, name, rate);
-            model.projects.push(project);
+            model.add(project);
             flush();
-            return project;
+            return self;
+        };
+
+        self.removeProject = function(project) {
+            model.remove(project);
+            flush();
+            return self;
         };
 
 
