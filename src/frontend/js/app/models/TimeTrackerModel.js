@@ -1,28 +1,27 @@
 models.TimeTracker = function(lastID){
-    var self = this;
-    self.lastID = lastID || 0;
-    self.projects = [];
+    this.lastID = lastID || 0;
+    this.projects = [];
+};
 
-    self.add = function(project) {
-        self.projects.push(project);
-        return self;
-    };
+models.TimeTracker.prototype.add = function(project) {
+    this.projects.push(project);
+    return this;
+};
 
-    self.remove = function(project) {
-        var iof = self.projects.indexOf(project);
-        if(iof > -1){
-            self.projects.splice(iof, 1);
-        }
-        return self;
-    };
-
-    self.__defineGetter__('nextID', function(){
-        return ++self.lastID;
-    });
-
-    self.toJSON = function(){
-        return models.TimeTracker.toJSON(self);
+models.TimeTracker.prototype.remove = function(project) {
+    var iof = this.projects.indexOf(project);
+    if(iof > -1){
+        this.projects.splice(iof, 1);
     }
+    return this;
+};
+
+models.TimeTracker.prototype.__defineGetter__('nextID', function(){
+    return ++this.lastID;
+});
+
+models.TimeTracker.prototype.toJSON = function(){
+    return models.TimeTracker.toJSON(this);
 };
 
 models.TimeTracker.parse = function(proto_json){
@@ -44,4 +43,4 @@ models.TimeTracker.toJSON = function(project){
         lastID : project.lastID,
         projects : $(project.projects).map(function(){ return models.Project.toJSON(this); })
     }
-}
+};

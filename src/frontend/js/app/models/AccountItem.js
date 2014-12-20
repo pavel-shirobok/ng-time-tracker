@@ -1,9 +1,5 @@
 models.AccountItem = function() {
-    var self = this;
 
-    self.toJSON = function(){
-        return {};
-    }
 };
 
 /*models.TimerAccountItem = function(){

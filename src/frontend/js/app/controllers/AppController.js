@@ -8,8 +8,16 @@ angular.
 
         $scope.projects = TimeTracker.projects;
         $scope.openMenu = openMenu;
+        $scope.startTracking = startTracking;
+        $scope.stopTracking = stopTracking;
+        $scope.trackingIsStarted = false;
+        $scope.showStartTrackingButton = function(){
+            return TimeTracker.projects.length > 0 && !$scope.trackingIsStarted;
+        };
 
-
+        $scope.showStopTrackingButton = function(){
+            return TimeTracker.projects.length > 0 && $scope.trackingIsStarted;
+        };
 
         function openMenu($event) {
             $mdBottomSheet.show({
@@ -40,11 +48,23 @@ angular.
         }
 
         function removeProject($event){
-            var currentProject = TimeTracker.projects[$scope.selectedIndex];
-            if(!currentProject)return;
+            var project = getCurrentProject()
+            if(!project)return;
 
-
-            Popups.openConfirmRemove(currentProject, $event).
+            Popups.openConfirmRemove(project, $event).
                 then(TimeTracker.removeProject);
+        }
+
+        function startTracking($event) {
+            $scope.trackingIsStarted = true;
+        }
+
+        function stopTracking($event) {
+            $scope.trackingIsStarted = false;
+        }
+
+
+        function getCurrentProject(){
+            return TimeTracker.projects[$scope.selectedIndex]
         }
     });

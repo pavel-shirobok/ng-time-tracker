@@ -18,6 +18,26 @@
         </md-tabs>
 
         <md-button
+                ng-click="startTracking($event)"
+                ng-show="showStartTrackingButton()"
+                class="md-fab md-primary start-tracking-button"
+                aria-label="Start tracking button"
+
+                >
+            <md-icon icon="img/icons/play.svg" style="width: 44px; height: 51px; line-height: 54px; opacity: 0.5;"></md-icon>
+        </md-button>
+
+        <md-button
+                ng-click="stopTracking($event)"
+                ng-show="showStopTrackingButton()"
+                class="md-fab md-primary stop-tracking-button"
+                aria-label="Start tracking button"
+
+                >
+            <md-icon icon="img/icons/stop.svg" style="width: 44px; height: 51px; line-height: 54px; opacity: 0.5;"></md-icon>
+        </md-button>
+
+        <md-button
                 ng-click="openMenu($event)"
                 class="md-fab md-primary add-project-button"
                 aria-label="Profile"
@@ -25,6 +45,8 @@
                 >
             <md-icon icon="/img/icons/menu.svg" style="width: 44px; height: 51px; line-height: 65px; opacity: 0.5;"></md-icon>
         </md-button>
+
+
     </div>
 
     <script src="js/lib.js"></script>

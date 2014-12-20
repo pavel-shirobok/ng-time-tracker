@@ -15,11 +15,22 @@ html, body {
   }
 }
 
-.add-project-button {
+.important-buttons(){
   position: fixed;
+  z-index: 9999;
+}
+
+.add-project-button {
+  .important-buttons();
   right: 50px;
   bottom: 43px;
-  z-index: 9999;
+}
+
+.start-tracking-button, .stop-tracking-button {
+  .important-buttons();
+  right: 50px;
+  top: 90px;
+  background-color: #FF5492 !important;
 }
 
 .project-tabs {

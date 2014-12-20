@@ -1,38 +1,34 @@
 models.Account = function(){
-    var self = this;
-    self.items = [];
-
-    var invalidated = true;
-    var billCache = 0;
-
-    self.takeBill = function(){
-        //todo
-
-        if(invalidated){
-            //recalc
-            //TODO
-
-            invalidated = false;
-            return billCache;
-        }
-
-        return billCache;
-    };
-
-
-    self.add = function(accountItem){
-        self.items.push(accountItem);
-        invalidated = true;
-        return accountItem;
-    };
-
-    self.remove = function(accountItem) {
-        //todo
-        invalidated = true;
-        return accountItem;
-    };
-
+    this.items = [];
+    this.__invalidated = true;
+    this.__billCache = 0;
 };
+
+models.Account.prototype.takeBill = function(){
+    if(this.__invalidated){
+        this.__invalidated = true;
+        //TODO make recalculation
+        return this.__billCache;
+    }
+};
+
+models.Account.prototype.add = function(item) {
+    this.items.push(item);
+    this.__invalidated = true;
+    return item;
+};
+
+models.Account.prototype.remove = function(item) {
+    //TODO remove item
+    this.__invalidated = true;
+    return item;
+};
+
+models.Account.prototype.toJSON = function(){
+    return models.Account.toJSON(this);
+};
+
+
 
 models.Account.parse = function(proto_json, ext_account){
     var account = ext_account || new models.Account();

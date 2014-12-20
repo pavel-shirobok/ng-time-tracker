@@ -1,19 +1,15 @@
 models.Project = function(id, name, rate) {
-    var self = this;
     this.id = id || -1;
     this.name = name || '';
     this.rate = rate || 0;
-
     this.account = new models.Account();
+};
 
-    this.toJSON = function() {
-        return models.Project.toJSON(self);
-    }
+models.Project.prototype.toJSON = function(){
+    return models.Project.toJSON(this);
 };
 
 models.Project.parse = function(proto_project) {
-    //todo
-
     var project = new models.Project();
 
     project.id   = proto_project.id;
@@ -30,6 +26,6 @@ models.Project.toJSON = function(project){
         id  : project.id,
         name : project.name,
         rate : project.rate,
-        account : models.Account.toJSON(project.account)
+        account : project.account.toJSON()
     };
 };
